@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.charge.StationMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.charge.Station">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="warden" property="warden" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getStationList" resultMap="BaseResultMap">
+        select * from station
+        <where>
+            <if test="id != null" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="stationDelete">
+        delete from station where id=#{id}
+    </delete>
+    <insert id="stationAdd" parameterType="com.lxy.charge.pojo.charge.Station">
+        INSERT INTO station (id, name, count, location, status, warden)
+        VALUES (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{count, jdbcType=INTEGER},
+                #{location, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{warden, jdbcType=VARCHAR})
+    </insert>
+
+    <update id="stationEdit" parameterType="com.lxy.charge.pojo.charge.Station">
+        UPDATE station SET
+                           name = #{name, jdbcType=VARCHAR},
+                           count = #{count, jdbcType=INTEGER},
+                           location = #{location, jdbcType=VARCHAR},
+                           status = #{status, jdbcType=VARCHAR},
+                           warden = #{warden, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=VARCHAR}
+    </update>
+
+    <delete id="stationDeleteByIds">
+        delete from station where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
