@@ -9,24 +9,29 @@ public class Warden {
     private String name;
     @Excel(name = "密码",orderNum = "3")
     private String password;
-    @Excel(name = "部门",orderNum = "4")
-    private String department;
+    @Excel(name = "所属站点",orderNum = "4")
+    private String station;
     @Excel(name = "电话",orderNum = "5")
     private String phone;
     @Excel(name = "权限",orderNum = "6")
 
     private String authority;
 
+    @Excel(name = "站点名称", orderNum = "7")
+    private String stationName;
+
     public Warden() {
+
     }
 
-    public Warden(String id, String name, String password, String department, String phone, String authority) {
+    public Warden(String id, String name, String password, String station, String phone, String authority, String stationName) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.department = department;
+        this.station = station;
         this.phone = phone;
         this.authority = authority;
+        this.stationName = stationName;
     }
 
     public String getId() {
@@ -53,12 +58,12 @@ public class Warden {
         this.password = password;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getStation() {
+        return station;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setStation(String station) {
+        this.station = station;
     }
 
     public String getPhone() {
@@ -77,15 +82,24 @@ public class Warden {
         this.authority = authority;
     }
 
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
     @Override
     public String toString() {
-        return "WardenService{" +
-                "id=" + id +
+        return "Warden{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", department='" + department + '\'' +
-                ", phone=" + phone +
+                ", station='" + station + '\'' +
+                ", phone='" + phone + '\'' +
                 ", authority='" + authority + '\'' +
+                ", stationName='" + stationName + '\'' +
                 '}';
     }
 }

@@ -6,13 +6,13 @@
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="station" property="station" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="authority" property="authority" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getWardenList" resultMap="BaseResultMap">
-        select * from warden
+        SELECT w.*,s.name as stationName from warden w LEFT JOIN station s on w.station=s.id
         <where>
             <if test="id != null" >
                 and id=#{id,jdbcType=INTEGER}
@@ -26,15 +26,15 @@
         delete from warden where id=#{id}
     </delete>
     <insert id="wardenAdd" parameterType="com.lxy.charge.pojo.charge.Warden">
-        insert into warden(id, name, password, department, phone, authority)
+        insert into warden(id, name, password, station, phone, authority)
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{department,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{authority,jdbcType=VARCHAR})
+                #{station,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{authority,jdbcType=VARCHAR})
     </insert>
     <update id="wardenEdit" parameterType="com.lxy.charge.pojo.charge.Warden">
         UPDATE warden SET
            `name`= #{name,jdbcType=VARCHAR},
            `password`=#{password,jdbcType=VARCHAR},
-           `department`=#{department,jdbcType=VARCHAR},
+           `station`=#{station,jdbcType=VARCHAR},
            `phone`=#{phone,jdbcType=VARCHAR},
            `authority`=#{authority,jdbcType=VARCHAR}
         WHERE (`id`= #{id,jdbcType=VARCHAR});

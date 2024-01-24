@@ -12,7 +12,7 @@
     </resultMap>
 
     <select id="getStationList" resultMap="BaseResultMap">
-        select * from station
+        SELECT s.*,w.name AS wardenName FROM station s LEFT JOIN warden w on s.warden=w.id
         <where>
             <if test="id != null" >
                 and id=#{id,jdbcType=INTEGER}
