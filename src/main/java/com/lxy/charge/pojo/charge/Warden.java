@@ -1,16 +1,18 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
 public class Warden {
     @Excel(name = "管理员编号",orderNum = "1")
-    private String id;
+    private Integer id;
     @Excel(name = "管理员名称",orderNum = "2")
     private String name;
     @Excel(name = "密码",orderNum = "3")
     private String password;
     @Excel(name = "所属站点",orderNum = "4")
-    private String station;
+    private Integer station;
     @Excel(name = "电话",orderNum = "5")
     private String phone;
     @Excel(name = "权限",orderNum = "6")
@@ -24,7 +26,7 @@ public class Warden {
 
     }
 
-    public Warden(String id, String name, String password, String station, String phone, String authority, String stationName) {
+    public Warden(Integer id, String name, String password, Integer station, String phone, String authority, String stationName) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -34,11 +36,11 @@ public class Warden {
         this.stationName = stationName;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -58,11 +60,11 @@ public class Warden {
         this.password = password;
     }
 
-    public String getStation() {
+    public Integer getStation() {
         return station;
     }
 
-    public void setStation(String station) {
+    public void setStation(Integer station) {
         this.station = station;
     }
 
@@ -93,10 +95,10 @@ public class Warden {
     @Override
     public String toString() {
         return "Warden{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", station='" + station + '\'' +
+                ", station=" + station +
                 ", phone='" + phone + '\'' +
                 ", authority='" + authority + '\'' +
                 ", stationName='" + stationName + '\'' +

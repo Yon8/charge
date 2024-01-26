@@ -2,6 +2,7 @@ package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.StationMapper;
 import com.lxy.charge.pojo.charge.Station;
+import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,8 +29,6 @@ public class StationService {
     }
 
     public Station stationAdd(Station station) {
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        station.setId(uuid.substring(0,6));
         stationMapper.stationAdd(station);
         return station;
     }
@@ -38,8 +37,12 @@ public class StationService {
         return stationMapper.stationEdit(station) == 1;
     }
 
-    public Boolean stationDeleteByIds(List<String> ids) {
+    public Boolean stationDeleteByIds(List<Integer> ids) {
         return stationMapper.stationDeleteByIds(ids)!=0;
+    }
+
+    public List<Warden> getWardenIdAndName() {
+        return stationMapper.getWardenIdAndName();
     }
     //声明SQL会话工厂并自动填充
     @Autowired

@@ -1,6 +1,7 @@
 package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.WardenMapper;
+import com.lxy.charge.pojo.charge.Station;
 import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -22,14 +23,15 @@ public class WardenService {
     public List<Warden> getWardenList(Warden warden) {
         return wardenMapper.getWardenList(warden);
     }
+    public List<Station> getStationIdAndName() {
+        return wardenMapper.getStationIdAndName();
+    }
 
     public Boolean wardenDelete(Warden warden) {
         return wardenMapper.wardenDelete(warden.getId()) == 1;
     }
 
     public Warden wardenAdd(Warden warden) {
-        String uuid = UUID.randomUUID().toString().replace("-", "");
-        warden.setId(uuid.substring(0,6));
         wardenMapper.wardenAdd(warden);
         return warden;
     }
@@ -38,7 +40,7 @@ public class WardenService {
         return wardenMapper.wardenEdit(warden) == 1;
     }
 
-    public Boolean wardenDeleteByIds(List<String> ids) {
+    public Boolean wardenDeleteByIds(List<Integer> ids) {
         return wardenMapper.wardenDeleteByIds(ids)!=0;
     }
     //声明SQL会话工厂并自动填充

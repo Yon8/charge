@@ -1,16 +1,18 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
 public class Station {
     @Excel(name = "站点编号", orderNum = "1")
-    private String id;
+    private Integer id;
 
     @Excel(name = "站点名称", orderNum = "2")
     private String name;
 
     @Excel(name = "站点数量", orderNum = "3")
-    private int count;
+    private Integer count;
 
     @Excel(name = "站点位置", orderNum = "4")
     private String location;
@@ -19,7 +21,7 @@ public class Station {
     private String status;
 
     @Excel(name = "管理员编号", orderNum = "6")
-    private String warden;
+    private Integer warden;
 
     @Excel(name = "管理员名称", orderNum = "7")
     private String wardenName;
@@ -28,7 +30,7 @@ public class Station {
     public Station() {
     }
 
-    public Station(String id, String name, int count, String location, String status, String warden, String wardenName) {
+    public Station(Integer id, String name, Integer count, String location, String status, Integer warden, String wardenName) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -38,11 +40,11 @@ public class Station {
         this.wardenName = wardenName;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -54,11 +56,11 @@ public class Station {
         this.name = name;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
@@ -78,11 +80,11 @@ public class Station {
         this.status = status;
     }
 
-    public String getWarden() {
+    public Integer getWarden() {
         return warden;
     }
 
-    public void setWarden(String warden) {
+    public void setWarden(Integer warden) {
         this.warden = warden;
     }
 
@@ -97,12 +99,12 @@ public class Station {
     @Override
     public String toString() {
         return "Station{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", count=" + count +
                 ", location='" + location + '\'' +
                 ", status='" + status + '\'' +
-                ", warden='" + warden + '\'' +
+                ", warden=" + warden +
                 ", wardenName='" + wardenName + '\'' +
                 '}';
     }

@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lxy.charge.pojo.PageVo;
+import com.lxy.charge.pojo.charge.Station;
 import com.lxy.charge.pojo.charge.Warden;
 import com.lxy.charge.service.charge.WardenService;
 import com.lxy.charge.utils.ExcelUtil;
@@ -35,9 +36,14 @@ public class WardenController {
         PageInfo<Warden> wardenPageInfo = new PageInfo<>(wardenList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenPageInfo);
     }
+    //用于添加Warden时的站点选择
+    @GetMapping("/getStationIdAndName")
+    public Wrapper<List<Station>> getStationIdAndName() {
+        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.getStationIdAndName());
+    }
 
     @DeleteMapping("/wardenDelete")
-    public Wrapper<Boolean> wardenDelete(String id) {
+    public Wrapper<Boolean> wardenDelete(Integer id) {
         Warden warden = new Warden();
         warden.setId(id);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.wardenDelete(warden));
@@ -55,7 +61,7 @@ public class WardenController {
     }
 
     @GetMapping("/wardenDeleteByIds")
-    public Wrapper<Boolean> wardenDeleteByIds(@RequestParam List<String> ids) {
+    public Wrapper<Boolean> wardenDeleteByIds(@RequestParam List<Integer> ids) {
         System.out.println(ids);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.wardenDeleteByIds(ids));
     }

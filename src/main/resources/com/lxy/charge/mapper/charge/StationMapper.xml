@@ -3,32 +3,35 @@
 <mapper namespace="com.lxy.charge.mapper.charge.StationMapper" >
 
     <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.charge.Station">
-        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
         <result column="location" property="location" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
-        <result column="warden" property="warden" jdbcType="VARCHAR"/>
+        <result column="warden" property="warden" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="getStationList" resultMap="BaseResultMap">
         SELECT s.*,w.name AS wardenName FROM station s LEFT JOIN warden w on s.warden=w.id
         <where>
             <if test="id != null" >
-                and id=#{id,jdbcType=INTEGER}
+                and s.id = #{id,jdbcType=INTEGER}
             </if>
             <if test="name != null" >
-                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+                and s.name like concat('%', #{name,jdbcType=VARCHAR}, '%')
             </if>
         </where>
+    </select>
+    <select id="getWardenIdAndName">
+        SELECT id,name FROM warden
     </select>
     <delete id="stationDelete">
         delete from station where id=#{id}
     </delete>
     <insert id="stationAdd" parameterType="com.lxy.charge.pojo.charge.Station">
         INSERT INTO station (id, name, count, location, status, warden)
-        VALUES (#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{count, jdbcType=INTEGER},
-                #{location, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{warden, jdbcType=VARCHAR})
+        VALUES (#{id, jdbcType=INTEGER}, #{name, jdbcType=VARCHAR}, #{count, jdbcType=INTEGER},
+                #{location, jdbcType=VARCHAR}, #{status, jdbcType=VARCHAR}, #{warden, jdbcType=INTEGER})
     </insert>
 
     <update id="stationEdit" parameterType="com.lxy.charge.pojo.charge.Station">
@@ -37,8 +40,8 @@
                            count = #{count, jdbcType=INTEGER},
                            location = #{location, jdbcType=VARCHAR},
                            status = #{status, jdbcType=VARCHAR},
-                           warden = #{warden, jdbcType=VARCHAR}
-        WHERE id = #{id, jdbcType=VARCHAR}
+                           warden = #{warden, jdbcType=INTEGER}
+        WHERE id = #{id, jdbcType=INTEGER}
     </update>
 
     <delete id="stationDeleteByIds">
