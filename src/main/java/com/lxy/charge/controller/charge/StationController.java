@@ -12,6 +12,7 @@ import com.lxy.charge.utils.WrapMapper;
 import com.lxy.charge.utils.Wrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,7 +57,17 @@ public class StationController {
 
     @PostMapping("/stationEdit")
     public Wrapper<Boolean> stationEdit(@RequestBody Station station) {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stationService.stationEdit(station));
+
+        try {
+            boolean success = stationService.stationEdit(station);
+            return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, success);
+        } catch (DataIntegrityViolationException e) {
+            // 捕获唯一性约束异常
+            return WrapMapper.error(Wrapper.ERROR_CODE, "唯一性约束异常：该主管已属于其他站点！");
+        } catch (Exception e) {
+            // 捕获其他异常
+            return WrapMapper.error(Wrapper.ERROR_CODE, "发生异常：请联系管理员！");
+        }
     }
 
     @GetMapping("/stationDeleteByIds")

@@ -17,7 +17,7 @@ public class Warden {
     private String phone;
     @Excel(name = "权限",orderNum = "6")
 
-    private String authority;
+    private Integer authority;
 
     @Excel(name = "站点名称", orderNum = "7")
     private String stationName;
@@ -26,7 +26,7 @@ public class Warden {
 
     }
 
-    public Warden(Integer id, String name, String password, Integer station, String phone, String authority, String stationName) {
+    public Warden(Integer id, String name, String password, Integer station, String phone, Integer authority, String stationName) {
         this.id = id;
         this.name = name;
         this.password = password;
@@ -76,11 +76,11 @@ public class Warden {
         this.phone = phone;
     }
 
-    public String getAuthority() {
+    public Integer getAuthority() {
         return authority;
     }
 
-    public void setAuthority(String authority) {
+    public void setAuthority(Integer authority) {
         this.authority = authority;
     }
 

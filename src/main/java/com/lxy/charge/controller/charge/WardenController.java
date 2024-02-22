@@ -12,6 +12,7 @@ import com.lxy.charge.utils.WrapMapper;
 import com.lxy.charge.utils.Wrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,8 +58,19 @@ public class WardenController {
 
     @PostMapping("/wardenEdit")
     public Wrapper<Boolean> wardenEdit(@RequestBody Warden warden) {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.wardenEdit(warden));
+        try {
+            // 调用 wardenService.wardenEdit 方法，该方法可能触发唯一性约束异常
+            boolean success = wardenService.wardenEdit(warden);
+            return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, success);
+        } catch (DataIntegrityViolationException e) {
+            // 捕获唯一性约束异常
+            return WrapMapper.error(Wrapper.ERROR_CODE, "唯一性约束异常：该充电站已分配主管！");
+        } catch (Exception e) {
+            // 捕获其他异常
+            return WrapMapper.error(Wrapper.ERROR_CODE, "发生异常：请联系管理员！");
+        }
     }
+
 
     @GetMapping("/wardenDeleteByIds")
     public Wrapper<Boolean> wardenDeleteByIds(@RequestParam List<Integer> ids) {

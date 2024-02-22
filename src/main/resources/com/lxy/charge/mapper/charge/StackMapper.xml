@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.charge.StackMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.charge.Stack">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="station" property="station" jdbcType="INTEGER"/>
+        <result column="voltage" property="voltage" jdbcType="DOUBLE"/>
+        <result column="current" property="current" jdbcType="DOUBLE"/>
+        <result column="user" property="user" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" jdbcType="VARCHAR"/>
+        <result column="quantity" property="quantity" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <select id="getStackList" resultMap="BaseResultMap">
+        SELECT s.*,station.name AS stationName FROM stack s LEFT JOIN station on s.station=station.id
+        <where>
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getStationIdAndName">
+        SELECT id,name FROM station
+    </select>
+    <delete id="stackDelete">
+        delete from stack where id=#{id}
+    </delete>
+    <insert id="stackAdd" parameterType="com.lxy.charge.pojo.charge.Stack">
+        INSERT INTO stack (id, name, station, status, voltage, current, user, startTime, quantity)
+        VALUES (#{id, jdbcType=INTEGER}, #{name, jdbcType=VARCHAR}, #{station, jdbcType=INTEGER},
+                #{status, jdbcType=VARCHAR}, #{voltage, jdbcType=DOUBLE}, #{current, jdbcType=DOUBLE}, #{user, jdbcType=INTEGER},
+                #{startTime, jdbcType=VARCHAR}, #{quantity, jdbcType=DOUBLE})
+    </insert>
+
+    <update id="stackEdit" parameterType="com.lxy.charge.pojo.charge.Stack">
+        UPDATE stack SET
+                         name = #{name, jdbcType=VARCHAR},
+                         station = #{station, jdbcType=INTEGER},
+                         voltage = #{voltage, jdbcType=DOUBLE},
+                         current = #{current, jdbcType=DOUBLE},
+                         user = #{user, jdbcType=INTEGER},
+                         status = #{status, jdbcType=VARCHAR},
+                         startTime = #{startTime, jdbcType=VARCHAR},
+                         quantity = #{quantity, jdbcType=DOUBLE}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="stackDeleteByIds">
+        delete from stack where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

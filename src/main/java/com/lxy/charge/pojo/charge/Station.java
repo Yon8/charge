@@ -18,7 +18,7 @@ public class Station {
     private String location;
 
     @Excel(name = "站点状态", orderNum = "5")
-    private String status;
+    private Integer status;
 
     @Excel(name = "管理员编号", orderNum = "6")
     private Integer warden;
@@ -30,7 +30,7 @@ public class Station {
     public Station() {
     }
 
-    public Station(Integer id, String name, Integer count, String location, String status, Integer warden, String wardenName) {
+    public Station(Integer id, String name, Integer count, String location, Integer status, Integer warden, String wardenName) {
         this.id = id;
         this.name = name;
         this.count = count;
@@ -72,11 +72,11 @@ public class Station {
         this.location = location;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
