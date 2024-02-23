@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.charge.FaultMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.charge.Fault">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="stack" property="stack" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="code" property="code" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getFaultList" resultMap="BaseResultMap">
+        SELECT f.*,s.name AS name FROM fault f LEFT JOIN stack s on f.stack=s.id
+        <where>
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and s.name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getStackIdAndName">
+        SELECT id,name FROM stack
+    </select>
+    <delete id="faultDelete">
+        delete from fault where id=#{id}
+    </delete>
+    <insert id="faultAdd" parameterType="com.lxy.charge.pojo.charge.Fault">
+        INSERT INTO fault (id, stack, time, code, level, status, description)
+        VALUES (#{id, jdbcType=INTEGER}, #{stack, jdbcType=INTEGER}, #{time, jdbcType=TIMESTAMP}, #{code, jdbcType=INTEGER},
+                #{level, jdbcType=INTEGER}, #{status, jdbcType=INTEGER}, #{description, jdbcType=VARCHAR})
+    </insert>
+
+    <update id="faultEdit" parameterType="com.lxy.charge.pojo.charge.Fault">
+        UPDATE fault SET
+                         stack = #{stack, jdbcType=INTEGER},
+                         time = #{time, jdbcType=TIMESTAMP},
+                         code = #{code, jdbcType=INTEGER},
+                         level = #{level, jdbcType=INTEGER},
+                         status = #{status, jdbcType=INTEGER},
+                         description = #{description, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="faultDeleteByIds">
+        delete from fault where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

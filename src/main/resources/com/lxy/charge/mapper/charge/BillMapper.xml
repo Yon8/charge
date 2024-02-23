@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.charge.BillMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.charge.Bill">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user" property="user" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="startTime" property="startTime" jdbcType="VARCHAR"/>
+        <result column="endTime" property="endTime" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="station" property="station" jdbcType="INTEGER"/>
+        <result column="stack" property="stack" jdbcType="INTEGER"/>
+        <result column="quantity" property="quantity" jdbcType="DOUBLE"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <select id="getBillList" resultMap="BaseResultMap">
+        SELECT b.* ,s.name as stationName, u.name AS name,st.name AS stackName
+        FROM bill b
+        LEFT JOIN station s ON b.station= s.id
+        LEFT JOIN user u ON b.user = u.id
+        LEFT JOIN stack st ON b.stack = st.id
+
+        <where>
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and u.name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <select id="getStationIdAndName">
+        SELECT id,name FROM station
+    </select>
+    <select id="getUserIdAndName">
+        SELECT id,name FROM user
+    </select>
+    <select id="getStackIdAndName">
+        SELECT id,name FROM stack
+    </select>
+    <delete id="billDelete">
+        delete from bill where id=#{id}
+    </delete>
+    <insert id="billAdd" parameterType="com.lxy.charge.pojo.charge.Bill">
+        INSERT INTO bill (id, user, status, station, type, startTime, quantity, amount)
+        VALUES (#{id, jdbcType=INTEGER}, #{user, jdbcType=INTEGER}, #{status, jdbcType=VARCHAR},
+                #{station, jdbcType=INTEGER}, #{type, jdbcType=INTEGER}, #{startTime, jdbcType=VARCHAR},
+                #{quantity, jdbcType=DOUBLE}, #{amount, jdbcType=DOUBLE})
+    </insert>
+
+    <update id="billEdit" parameterType="com.lxy.charge.pojo.charge.Bill">
+        UPDATE bill SET
+                        user = #{user, jdbcType=INTEGER},
+                        status = #{status, jdbcType=VARCHAR},
+                        station = #{station, jdbcType=INTEGER},
+                        type = #{type, jdbcType=INTEGER},
+                        startTime = #{startTime, jdbcType=VARCHAR},
+                        quantity = #{quantity, jdbcType=DOUBLE},
+                        amount = #{amount, jdbcType=DOUBLE}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="billDeleteByIds">
+        delete from bill where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

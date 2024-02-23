@@ -1,9 +1,10 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
-
+@JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
 public class Stack {
     @Excel(name = "充电桩编号", orderNum = "1")
     private Integer id;

@@ -83,7 +83,7 @@ public class StationController {
         response.setHeader("Access-Control-Expose-Headers","content-disposition,filename");
         System.out.println(stationList);
 
-        ExcelUtil.exportExcel(stationList,null,"充电桩管理员",Station.class,"充电桩管理员.xls",response);
+        ExcelUtil.exportExcel(stationList,null,"充电站",Station.class,"充电站.xls",response);
     }
     @PostMapping(value = "/importStationList")
     public Wrapper<List<Station>> importList(@RequestPart("file") MultipartFile excel) throws Exception {

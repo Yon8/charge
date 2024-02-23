@@ -83,7 +83,7 @@ public class StackController {
         response.setHeader("Access-Control-Expose-Headers","content-disposition,filename");
         System.out.println(stackList);
 
-        ExcelUtil.exportExcel(stackList,null,"充电桩管理员",Stack.class,"充电桩管理员.xls",response);
+        ExcelUtil.exportExcel(stackList,null,"充电桩",Stack.class,"充电桩.xls",response);
     }
     @PostMapping(value = "/importStackList")
     public Wrapper<List<Stack>> importList(@RequestPart("file") MultipartFile excel) throws Exception {
