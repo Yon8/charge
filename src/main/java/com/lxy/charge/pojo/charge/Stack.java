@@ -1,6 +1,7 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class Stack {
     @Excel(name = "用户", orderNum = "7")
     private Integer user;
     @Excel(name = "开始时间", orderNum = "8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private LocalDateTime startTime;
     @Excel(name = "电量", orderNum = "9")
     private Double quantity;

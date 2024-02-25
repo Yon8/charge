@@ -22,7 +22,7 @@
             </if>
         </where>
     </select>
-    <select id="getStationIdAndName">
+    <select id="getStationIdAndName" resultType="com.lxy.charge.pojo.charge.Station">
         SELECT id,name FROM station
     </select>
     <delete id="wardenDelete">

@@ -1,0 +1,202 @@
+package com.lxy.charge.pojo.system;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+//用户实体类
+public class SysUser {
+
+    private Integer id;//用户id
+
+    private String username;//用户名
+
+    private String password;//密码
+
+    private String name;//昵称
+    private String role;
+    private Integer roleId;
+
+    private Integer gender;//性别：0、男，1、女
+
+    private LocalDate birthday;//出生日期
+
+    private String address;//地址
+
+    private String phone;//手机号
+
+    private String email;//邮件
+
+    private Integer delFlag;//删除状态：0、正常，1、已删除
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private LocalDateTime updateTime;//更新时间
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private LocalDateTime createTime;//创建时间
+
+    private String remarks;//备注
+
+    public SysUser() {
+    }
+
+    public SysUser(Integer id, String username, String password, String name, String role, Integer roleId, Integer gender, LocalDate birthday, String address, String phone, String email, Integer delFlag, LocalDateTime updateTime, LocalDateTime createTime, String remarks) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.role = role;
+        this.roleId = roleId;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.delFlag = delFlag;
+        this.updateTime = updateTime;
+        this.createTime = createTime;
+        this.remarks = remarks;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", roleId=" + roleId +
+                ", gender=" + gender +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", delFlag=" + delFlag +
+                ", updateTime=" + updateTime +
+                ", createTime=" + createTime +
+                ", remarks='" + remarks + '\'' +
+                '}';
+    }
+}

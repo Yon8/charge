@@ -26,7 +26,7 @@
         </where>
         GROUP BY s.id
     </select>
-    <select id="getWardenIdAndName">
+    <select id="getWardenIdAndName" resultType="com.lxy.charge.pojo.charge.Warden">
         SELECT id,name FROM warden
     </select>
     <select id="getStackCount">

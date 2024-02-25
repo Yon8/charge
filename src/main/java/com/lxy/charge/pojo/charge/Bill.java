@@ -1,6 +1,7 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
@@ -18,9 +19,11 @@ public class Bill {
     private Integer status;
 
     @Excel(name = "开始时间", orderNum = "5")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private LocalDateTime startTime;
 
     @Excel(name = "结束时间", orderNum = "6")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private LocalDateTime endTime;
 
     @Excel(name = "充电类型", orderNum = "7")

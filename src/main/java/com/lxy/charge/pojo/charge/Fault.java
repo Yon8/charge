@@ -1,6 +1,7 @@
 package com.lxy.charge.pojo.charge;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ public class Fault {
     private Integer stack;
 
     @Excel(name = "故障时间", orderNum = "3")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
     private LocalDateTime time;
 
     @Excel(name = "故障代码", orderNum = "4")

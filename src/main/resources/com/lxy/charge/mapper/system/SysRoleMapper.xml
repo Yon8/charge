@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.system.SysRoleMapper" >
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.system.SysRole" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="creator" property="creator" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+
+    <select id="getRoleIdAndName" resultType="com.lxy.charge.pojo.system.SysRole" >
+        select
+        id,name
+        from sys_role
+    </select>
+
+    <select id="getSysRoleList" resultMap="BaseResultMap">
+        select r.*,u.name as creatorName from sys_role r LEFT JOIN sys_user u ON r.creator = u.id
+        <where>
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="sysRoleDelete">
+        delete from sys_role where id=#{id}
+    </delete>
+    <insert id="sysRoleAdd" parameterType="com.lxy.charge.pojo.system.SysRole">
+        INSERT INTO sys_role (id, name, status, type, creator, update_time, create_time)
+        VALUES (#{id, jdbcType=INTEGER}, #{name, jdbcType=VARCHAR}, #{status, jdbcType=INTEGER},
+                #{type, jdbcType=INTEGER}, #{creator, jdbcType=VARCHAR},
+                #{updateTime, jdbcType=TIMESTAMP}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="sysRoleEdit" parameterType="com.lxy.charge.pojo.system.SysRole">
+        UPDATE sys_role SET
+                            name = #{name, jdbcType=VARCHAR},
+                            status = #{status, jdbcType=INTEGER},
+                            type = #{type, jdbcType=INTEGER},
+                            creator = #{creator, jdbcType=VARCHAR},
+                            update_time = #{updateTime, jdbcType=TIMESTAMP},
+                            create_time = #{createTime, jdbcType=TIMESTAMP}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="sysRoleDeleteByIds">
+        delete from sys_role where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id, jdbcType=INTEGER}
+        </foreach>
+    </delete>
+
+
+
+
+
+
+</mapper>

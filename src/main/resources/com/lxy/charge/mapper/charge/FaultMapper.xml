@@ -23,7 +23,7 @@
             </if>
         </where>
     </select>
-    <select id="getStackIdAndName">
+    <select id="getStackIdAndName" resultType="com.lxy.charge.pojo.charge.Stack">
         SELECT id,name FROM stack
     </select>
     <delete id="faultDelete">
