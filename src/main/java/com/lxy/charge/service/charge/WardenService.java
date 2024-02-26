@@ -23,8 +23,8 @@ public class WardenService {
     public List<Warden> getWardenList(Warden warden) {
         return wardenMapper.getWardenList(warden);
     }
-    public List<Station> getStationIdAndName() {
-        return wardenMapper.getStationIdAndName();
+    public List<Warden> getWardenIdAndName() {
+        return wardenMapper.getWardenIdAndName();
     }
 
     public Boolean wardenDelete(Warden warden) {

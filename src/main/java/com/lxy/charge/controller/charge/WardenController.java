@@ -4,7 +4,6 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lxy.charge.pojo.PageVo;
-import com.lxy.charge.pojo.charge.Station;
 import com.lxy.charge.pojo.charge.Warden;
 import com.lxy.charge.service.charge.WardenService;
 import com.lxy.charge.utils.ExcelUtil;
@@ -38,9 +37,9 @@ public class WardenController {
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenPageInfo);
     }
     //用于添加Warden时的站点选择
-    @GetMapping("/getStationIdAndName")
-    public Wrapper<List<Station>> getStationIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.getStationIdAndName());
+    @GetMapping("/getWardenIdAndName")
+    public Wrapper<List<Warden>> getWardenIdAndName() {
+        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenService.getWardenIdAndName());
     }
 
     @DeleteMapping("/wardenDelete")

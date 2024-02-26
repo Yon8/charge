@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lxy.charge.pojo.PageVo;
 import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.Warden;
 import com.lxy.charge.service.charge.StationService;
 import com.lxy.charge.utils.ExcelUtil;
 import com.lxy.charge.utils.WrapMapper;
@@ -37,10 +36,9 @@ public class StationController {
         PageInfo<Station> stationPageInfo = new PageInfo<>(stationList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stationPageInfo);
     }
-    //用于添加Station时的管理员选择
-    @GetMapping("/getWardenIdAndName")
-    public Wrapper<List<Warden>> getWardenIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stationService.getWardenIdAndName());
+    @GetMapping("/getStationIdAndName")
+    public Wrapper<List<Station>> getStationIdAndName() {
+        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stationService.getStationIdAndName());
     }
     @DeleteMapping("/stationDelete")
     public Wrapper<Boolean> stationDelete(Integer id) {

@@ -1,7 +1,6 @@
 package com.lxy.charge.mapper.charge;
 
 import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface StationMapper {
     List<Station> getStationList(Station station);
-    List<Warden> getWardenIdAndName();
+    List<Station> getStationIdAndName();
     int stationDelete(Integer id);
 
     int stationAdd(Station station);

@@ -22,6 +22,9 @@
             </if>
         </where>
     </select>
+    <select id="getUserIdAndName" resultType="com.lxy.charge.pojo.charge.User">
+        SELECT id,name FROM user
+    </select>
     <delete id="userDelete">
         delete from user where id=#{id}
     </delete>

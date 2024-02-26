@@ -36,6 +36,10 @@ public class UserController {
         PageInfo<User> userPageInfo = new PageInfo<>(userList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, userPageInfo);
     }
+    @GetMapping("/getUserIdAndName")
+    public Wrapper<List<User>> getUserIdAndName() {
+        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, userService.getUserIdAndName());
+    }
     @DeleteMapping("/userDelete")
     public Wrapper<Boolean> userDelete(Integer id) {
         User user = new User();

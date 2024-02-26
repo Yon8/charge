@@ -2,7 +2,6 @@ package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.StationMapper;
 import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class StationService {
@@ -22,6 +20,9 @@ public class StationService {
 
     public List<Station> getStationList(Station station) {
         return stationMapper.getStationList(station);
+    }
+    public List<Station> getStationIdAndName() {
+        return stationMapper.getStationIdAndName();
     }
 
     public Boolean stationDelete(Station station) {
@@ -41,9 +42,6 @@ public class StationService {
         return stationMapper.stationDeleteByIds(ids)!=0;
     }
 
-    public List<Warden> getWardenIdAndName() {
-        return stationMapper.getWardenIdAndName();
-    }
     //声明SQL会话工厂并自动填充
     @Autowired
     private SqlSessionFactory sqlSessionFactory;

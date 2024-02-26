@@ -22,8 +22,8 @@
             </if>
         </where>
     </select>
-    <select id="getStationIdAndName" resultType="com.lxy.charge.pojo.charge.Station">
-        SELECT id,name FROM station
+    <select id="getWardenIdAndName" resultType="com.lxy.charge.pojo.charge.Warden">
+        SELECT id,name FROM warden
     </select>
     <delete id="wardenDelete">
         delete from warden where id=#{id}

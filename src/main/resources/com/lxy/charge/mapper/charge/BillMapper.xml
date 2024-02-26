@@ -31,15 +31,6 @@
             </if>
         </where>
     </select>
-    <select id="getStationIdAndName" resultType="com.lxy.charge.pojo.charge.Station">
-        SELECT id,name FROM station
-    </select>
-    <select id="getUserIdAndName" resultType="com.lxy.charge.pojo.charge.User">
-        SELECT id,name FROM user
-    </select>
-    <select id="getStackIdAndName" resultType="com.lxy.charge.pojo.charge.Stack">
-        SELECT id,name FROM stack
-    </select>
     <delete id="billDelete">
         delete from bill where id=#{id}
     </delete>

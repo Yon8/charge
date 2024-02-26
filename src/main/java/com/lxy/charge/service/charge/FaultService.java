@@ -2,7 +2,6 @@ package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.FaultMapper;
 import com.lxy.charge.pojo.charge.Fault;
-import com.lxy.charge.pojo.charge.Stack;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,9 +20,6 @@ public class FaultService {
 
     public List<Fault> getFaultList(Fault fault) {
         return faultMapper.getFaultList(fault);
-    }
-    public List<Stack> getStackIdAndName() {
-        return faultMapper.getStackIdAndName();
     }
 
     public Boolean faultDelete(Fault fault) {

@@ -1,8 +1,6 @@
 package com.lxy.charge.mapper.charge;
 
 import com.lxy.charge.pojo.charge.Stack;
-import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,7 +11,7 @@ public interface StackMapper {
     int stackDelete(Integer id);
 
     int stackAdd(Stack stack);
-    List<Station> getStationIdAndName();
+    List<Stack> getStackIdAndName();
 
     int stackEdit(Stack stack);
 

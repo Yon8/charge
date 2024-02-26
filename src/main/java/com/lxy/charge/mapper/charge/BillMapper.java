@@ -1,9 +1,6 @@
 package com.lxy.charge.mapper.charge;
 
 import com.lxy.charge.pojo.charge.Bill;
-import com.lxy.charge.pojo.charge.Stack;
-import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,11 +11,6 @@ public interface BillMapper {
     int billDelete(Integer id);
 
     int billAdd(Bill bill);
-    List<Station> getStationIdAndName();
-
-    List<Stack> getStackIdAndName();
-
-    List<User> getUserIdAndName();
 
     int billEdit(Bill bill);
 

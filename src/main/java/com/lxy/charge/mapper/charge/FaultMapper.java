@@ -1,7 +1,6 @@
 package com.lxy.charge.mapper.charge;
 
 import com.lxy.charge.pojo.charge.Fault;
-import com.lxy.charge.pojo.charge.Stack;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public interface FaultMapper {
     int faultDelete(Integer id);
 
     int faultAdd(Fault fault);
-    List<Stack> getStackIdAndName();
 
     int faultEdit(Fault fault);
 

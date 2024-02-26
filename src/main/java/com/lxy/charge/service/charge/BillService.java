@@ -2,9 +2,6 @@ package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.BillMapper;
 import com.lxy.charge.pojo.charge.Bill;
-import com.lxy.charge.pojo.charge.Stack;
-import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.User;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,15 +20,6 @@ public class BillService {
 
     public List<Bill> getBillList(Bill bill) {
         return billMapper.getBillList(bill);
-    }
-    public List<Station> getStationIdAndName() {
-        return billMapper.getStationIdAndName();
-    }
-    public List<Stack>  getStackIdAndName() {
-        return billMapper.getStackIdAndName();
-    }
-    public List<User> getUserIdAndName() {
-        return billMapper.getUserIdAndName();
     }
 
     public Boolean billDelete(Bill bill) {

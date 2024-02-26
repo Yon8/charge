@@ -22,6 +22,9 @@ public class UserService {
     public List<User> getUserList(User user) {
         return userMapper.getUserList(user);
     }
+    public List<User> getUserIdAndName() {
+        return userMapper.getUserIdAndName();
+    }
 
     public Boolean userDelete(User user) {
         return userMapper.userDelete(user.getId()) == 1;

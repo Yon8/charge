@@ -37,9 +37,9 @@ public class StackController {
         PageInfo<Stack> stackPageInfo = new PageInfo<>(stackList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stackPageInfo);
     }
-    @GetMapping("/getStationIdAndName")
-    public Wrapper<List<Station>> getStationIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stackService.getStationIdAndName());
+    @GetMapping("/getStackIdAndName")
+    public Wrapper<List<Stack>>  getStackIdAndName() {
+        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE,stackService.getStackIdAndName());
     }
     @DeleteMapping("/stackDelete")
     public Wrapper<Boolean> stackDelete(Integer id) {

@@ -37,10 +37,6 @@ public class FaultController {
         PageInfo<Fault> faultPageInfo = new PageInfo<>(faultList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, faultPageInfo);
     }
-    @GetMapping("/getStackIdAndName")
-    public Wrapper<List<Stack>> getStationIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, faultService.getStackIdAndName());
-    }
     @DeleteMapping("/faultDelete")
     public Wrapper<Boolean> faultDelete(Integer id) {
         Fault fault = new Fault();

@@ -26,11 +26,8 @@
         </where>
         GROUP BY s.id
     </select>
-    <select id="getWardenIdAndName" resultType="com.lxy.charge.pojo.charge.Warden">
-        SELECT id,name FROM warden
-    </select>
-    <select id="getStackCount">
-        SELECT station,count(*) as count from stack GROUP BY station
+    <select id="getStationIdAndName" resultType="com.lxy.charge.pojo.charge.Station">
+        SELECT id,name FROM station
     </select>
 
     <delete id="stationDelete">

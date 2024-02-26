@@ -2,8 +2,6 @@ package com.lxy.charge.service.charge;
 
 import com.lxy.charge.mapper.charge.StackMapper;
 import com.lxy.charge.pojo.charge.Stack;
-import com.lxy.charge.pojo.charge.Station;
-import com.lxy.charge.pojo.charge.Warden;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,8 +21,8 @@ public class StackService {
     public List<Stack> getStackList(Stack stack) {
         return stackMapper.getStackList(stack);
     }
-    public List<Station> getStationIdAndName() {
-        return stackMapper.getStationIdAndName();
+    public List<Stack> getStackIdAndName() {
+        return stackMapper.getStackIdAndName();
     }
 
     public Boolean stackDelete(Stack stack) {

@@ -39,18 +39,7 @@ public class BillController {
         PageInfo<Bill> billPageInfo = new PageInfo<>(billList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, billPageInfo);
     }
-    @GetMapping("/getStationIdAndName")
-    public Wrapper<List<Station>> getStationIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, billService.getStationIdAndName());
-    }
-    @GetMapping("/getStackIdAndName")
-    public Wrapper<List<Stack>>  getStackIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, billService.getStackIdAndName());
-    }
-    @GetMapping("/getUserIdAndName")
-    public Wrapper<List<User>> getUserIdAndName() {
-        return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, billService.getUserIdAndName());
-    }
+
     @DeleteMapping("/billDelete")
     public Wrapper<Boolean> billDelete(Integer id) {
         Bill bill = new Bill();
