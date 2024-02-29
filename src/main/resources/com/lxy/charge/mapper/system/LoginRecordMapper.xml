@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lxy.charge.mapper.system.LoginRecordMapper" >
+
+    <resultMap id="BaseResultMap" type="com.lxy.charge.pojo.system.LoginRecord">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sys_user" property="sysUser" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getLoginRecordList" resultMap="BaseResultMap">
+        SELECT r.*,s.username AS name FROM login_record r LEFT JOIN sys_user s on r.sys_user=s.id
+        <where>
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="name != null" >
+                and s.name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="loginRecordDelete">
+        delete from login_record where id=#{id}
+    </delete>
+    <insert id="loginRecordAdd" parameterType="com.lxy.charge.pojo.system.LoginRecord">
+        INSERT INTO login_record (sys_user,time,ip)
+        VALUES (#{sysUser,jdbcType=INTEGER}
+        , #{time,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="loginRecordEdit" parameterType="com.lxy.charge.pojo.system.LoginRecord">
+        UPDATE login_record SET
+                                sys_user =  #{sysUser,jdbcType=INTEGER} ,
+                                time =  #{time,jdbcType=TIMESTAMP} ,
+                                ip =  #{ip,jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=INTEGER}
+    </update>
+
+    <delete id="loginRecordDeleteByIds">
+        delete from login_record where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

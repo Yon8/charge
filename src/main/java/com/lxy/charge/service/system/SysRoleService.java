@@ -8,10 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Transactional
 @Service
 public class SysRoleService {
 
@@ -58,7 +59,6 @@ public class SysRoleService {
             list.forEach(sysRole -> sysRoleMapper.sysRoleAdd(sysRole));
             // 提交数据
             sqlSession.commit();
-            sqlSession.rollback();
         } catch (Exception e) {
             sqlSession.rollback();
         } finally {

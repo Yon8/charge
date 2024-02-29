@@ -33,7 +33,7 @@ public class FaultController {
     @GetMapping("/getFaultList")
     public Wrapper<PageInfo<Fault>> getFaultList(PageVo page, Fault fault) {
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<Fault> faultList = faultService.getFaultList(fault);
+        List<Fault> faultList = faultService.getFaultList(fault,page);
         PageInfo<Fault> faultPageInfo = new PageInfo<>(faultList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, faultPageInfo);
     }

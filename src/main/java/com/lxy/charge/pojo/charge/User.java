@@ -3,8 +3,10 @@ package com.lxy.charge.pojo.charge;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.io.Serializable;
+
 @JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
-public class User {
+public class User implements Serializable {
     @Excel(name = "用户ID", orderNum = "1")
     private Integer id;
 

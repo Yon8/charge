@@ -32,7 +32,7 @@ public class StationController {
     @GetMapping("/getStationList")
     public Wrapper<PageInfo<Station>> getStationList(PageVo page, Station station) {
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<Station> stationList = stationService.getStationList(station);
+        List<Station> stationList = stationService.getStationList(station,page);
         PageInfo<Station> stationPageInfo = new PageInfo<>(stationList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stationPageInfo);
     }

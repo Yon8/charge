@@ -4,9 +4,10 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
-public class Stack {
+public class Stack implements Serializable {
     @Excel(name = "充电桩编号", orderNum = "1")
     private Integer id;
     @Excel(name = "充电桩名称", orderNum = "2")

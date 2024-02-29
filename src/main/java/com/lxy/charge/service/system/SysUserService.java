@@ -58,7 +58,6 @@ public class SysUserService {
             list.forEach(sysUser -> sysUserMapper.sysUserAdd(sysUser));
             // 提交数据
             sqlSession.commit();
-            sqlSession.rollback();
         } catch (Exception e) {
             sqlSession.rollback();
         } finally {

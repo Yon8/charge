@@ -3,9 +3,10 @@ package com.lxy.charge.pojo.charge;
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Fault {
+public class Fault implements Serializable{
     @Excel(name = "ID", orderNum = "1")
     private Integer id;
 

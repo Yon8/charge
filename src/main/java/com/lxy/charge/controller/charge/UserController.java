@@ -32,7 +32,7 @@ public class UserController {
     @GetMapping("/getUserList")
     public Wrapper<PageInfo<User>> getUserList(PageVo page, User user) {
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<User> userList = userService.getUserList(user);
+        List<User> userList = userService.getUserList(user,page);
         PageInfo<User> userPageInfo = new PageInfo<>(userList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, userPageInfo);
     }

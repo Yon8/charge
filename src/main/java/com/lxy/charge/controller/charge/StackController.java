@@ -33,7 +33,7 @@ public class StackController {
     @GetMapping("/getStackList")
     public Wrapper<PageInfo<Stack>> getStackList(PageVo page, Stack stack) {
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<Stack> stackList = stackService.getStackList(stack);
+        List<Stack> stackList = stackService.getStackList(stack,page);
         PageInfo<Stack> stackPageInfo = new PageInfo<>(stackList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, stackPageInfo);
     }

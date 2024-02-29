@@ -1,28 +1,40 @@
 package com.lxy.charge.pojo.system;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.LocalDateTime;
 
 //角色实体类
+@JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
 public class SysRole {
-    private Integer id;//角色id
 
-    private String name;//角色名称
+    @Excel(name = "角色ID", orderNum = "1")
+    private Integer id; // 角色id
 
-    private Integer status;//状态，是否已经启用
+    @Excel(name = "角色名称", orderNum = "2")
+    private String name; // 角色名称
 
-    private Integer type;//角色类型，0，平台角色，1，非平台角色
+    @Excel(name = "状态", orderNum = "3")
+    private Integer status; // 状态，是否已经启用
 
+    @Excel(name = "角色类型", orderNum = "4")
+    private Integer type; // 角色类型，0-平台角色，1-非平台角色
 
-    private Integer creator;//创建人
-    private String creatorName;//创建人名称
+    @Excel(name = "创建人", orderNum = "5")
+    private Integer creator; // 创建人
 
+    @Excel(name = "创建人名称", orderNum = "6")
+    private String creatorName; // 创建人名称
+
+    @Excel(name = "更新时间", orderNum = "7")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
-    private LocalDateTime updateTime;//更新时间
+    private LocalDateTime updateTime; // 更新时间
 
+    @Excel(name = "创建时间", orderNum = "8")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
-    private LocalDateTime createTime;//创建时间
+    private LocalDateTime createTime; // 创建时间
 
     public SysRole() {
     }

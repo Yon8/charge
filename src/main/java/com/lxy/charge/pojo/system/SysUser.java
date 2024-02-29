@@ -1,43 +1,61 @@
 package com.lxy.charge.pojo.system;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //用户实体类
-public class SysUser {
+@JsonInclude(JsonInclude.Include.NON_NULL) //属性值为null时不返回
+public class SysUser{
 
-    private Integer id;//用户id
+    @Excel(name = "用户ID", orderNum = "1")
+    private Integer id; // 用户id
 
-    private String username;//用户名
+    @Excel(name = "用户名", orderNum = "2")
+    private String username; // 用户名
 
-    private String password;//密码
+    @Excel(name = "密码", orderNum = "3")
+    private String password; // 密码
 
-    private String name;//昵称
-    private String role;
-    private Integer roleId;
+    @Excel(name = "昵称", orderNum = "4")
+    private String name; // 昵称
 
-    private Integer gender;//性别：0、男，1、女
+    @Excel(name = "角色", orderNum = "5")
+    private String role; // 角色名称
 
-    private LocalDate birthday;//出生日期
+    @Excel(name = "角色ID", orderNum = "6")
+    private Integer roleId; // 角色ID
 
-    private String address;//地址
+    @Excel(name = "性别", orderNum = "7")
+    private Integer gender; // 性别：0-男，1-女
 
-    private String phone;//手机号
+    @Excel(name = "出生日期", orderNum = "8")
+    private LocalDate birthday; // 出生日期
 
-    private String email;//邮件
+    @Excel(name = "地址", orderNum = "9")
+    private String address; // 地址
 
-    private Integer delFlag;//删除状态：0、正常，1、已删除
+    @Excel(name = "手机号", orderNum = "10")
+    private String phone; // 手机号
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
-    private LocalDateTime updateTime;//更新时间
+    @Excel(name = "邮件", orderNum = "11")
+    private String email; // 邮件
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
-    private LocalDateTime createTime;//创建时间
+    @Excel(name = "删除状态", orderNum = "12")
+    private Integer delFlag; // 删除状态：0-正常，1-已删除
 
-    private String remarks;//备注
+    @Excel(name = "更新时间", orderNum = "13")
+    private LocalDateTime updateTime; // 更新时间
 
+    @Excel(name = "创建时间", orderNum = "14")
+    private LocalDateTime createTime; // 创建时间
+
+    @Excel(name = "备注", orderNum = "15")
+    private String remarks; // 备注
     public SysUser() {
     }
 

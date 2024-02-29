@@ -32,7 +32,7 @@ public class WardenController {
     @GetMapping("/getWardenList")
     public Wrapper<PageInfo<Warden>> getWardenList(PageVo page, Warden warden) {
         PageHelper.startPage((int) page.getCurrent(), (int) page.getSize());
-        List<Warden> wardenList = wardenService.getWardenList(warden);
+        List<Warden> wardenList = wardenService.getWardenList(warden,page);
         PageInfo<Warden> wardenPageInfo = new PageInfo<>(wardenList);
         return WrapMapper.wrap(Wrapper.SUCCESS_CODE, Wrapper.SUCCESS_MESSAGE, wardenPageInfo);
     }

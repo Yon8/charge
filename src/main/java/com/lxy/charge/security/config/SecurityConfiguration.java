@@ -4,9 +4,11 @@ package com.lxy.charge.security.config;
 import com.lxy.charge.security.filter.JwtAuthenticationFilter;
 import com.lxy.charge.security.filter.JwtLoginFilter;
 import com.lxy.charge.security.service.SecurityService;
+import com.lxy.charge.service.system.LoginRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -24,6 +26,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     SecurityService customUserDetailsService;
+    @Autowired
+    LoginRecordService loginRecordService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -42,13 +46,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().cors().configurationSource(corsConfigurationSource())
                 .and().csrf().disable()
                 //登录拦截器 成功登录 发放token  /login
-                .addFilter(new JwtLoginFilter(authenticationManager()))
+                .addFilter(new JwtLoginFilter(authenticationManager(),loginRecordService))
                 //其它访问拦截器 验证token是否有效 有效才放行
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()));
         http.exceptionHandling()
                 .authenticationEntryPoint(new DefaultAuthenticationEntryPoint())
                 .accessDeniedHandler(new DefaultAccessDeniedExceptionHandler());
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 设置用户User,根据用户名,找到用户User，比对密码 获取role

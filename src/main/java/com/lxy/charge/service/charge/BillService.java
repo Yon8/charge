@@ -7,9 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 @Service
 public class BillService {
     private final BillMapper billMapper;
@@ -51,7 +52,6 @@ public class BillService {
             list.forEach(user -> userMapper.billAdd(user));
             // 提交数据
             sqlSession.commit();
-            sqlSession.rollback();
         } catch (Exception e) {
             sqlSession.rollback();
         } finally {
